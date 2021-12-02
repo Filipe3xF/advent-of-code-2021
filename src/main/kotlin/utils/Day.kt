@@ -8,25 +8,27 @@ class Day<T, R, V>(
     private val inputTransformation: (List<String>) -> T,
     private val partOne: (T) -> R,
     private val partTwo: (T) -> V,
+    dayInputSupplier: DayInputSupplier = HttpDayInputSupplier()
 ) {
 
-    private val input: Either<Throwable, T> = readInput("Day$number").map { inputTransformation(it) }
+    private val input: Either<Throwable, T> = dayInputSupplier.getDayInput(number).map { inputTransformation(it) }
 
-    fun printResult() {
-        input.fold({
-            print("It was not possible to get the result of the Day $number:")
-            when (it) {
-                is FileNotFoundException -> println("\nThere is no file for Day $number.")
-                else -> throw it
-            }
-        }) {
-            println(
-                """
-                    Results for Day $number:
-                        Part 1: ${partOne(it)}
-                        Part 2: ${partTwo(it)}
-                """.trimIndent()
-            )
+    fun printResult() = input.fold({ handleThrowable(it) }) { handleInput(it) }
+
+    private fun handleThrowable(throwable: Throwable) {
+        print("It was not possible to get the result of the Day $number:\n")
+        when (throwable) {
+            is FileNotFoundException -> println("There is no file for Day $number.")
+            is HttpDayInputSupplier.HttpDayInputRequestError -> println(throwable.message)
+            else -> throw throwable
         }
     }
+
+    private fun handleInput(input: T) = println(
+        """
+            Results for Day $number:
+                Part 1: ${partOne(input)}
+                Part 2: ${partTwo(input)}
+        """.trimIndent()
+    )
 }

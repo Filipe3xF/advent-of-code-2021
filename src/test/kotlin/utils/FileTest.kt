@@ -13,7 +13,7 @@ class FileTest {
 
     @Test
     fun `reads files contents`() {
-        val input = readInput("HelloWorld", "src/test/resources")
+        val input = readFile("HelloWorld", "txt", "src/test/resources")
 
         assertSoftly {
             val inputLines = input.shouldBeRight()
@@ -24,7 +24,7 @@ class FileTest {
 
     @Test
     fun `catches errors on reading files contents`() {
-        val input = readInput("NonExistentFile")
+        val input = readFile("nonExistentFile", "nonExistentExtension", "non/existent/path")
 
         input.shouldBeLeft().shouldBeTypeOf<FileNotFoundException>()
     }

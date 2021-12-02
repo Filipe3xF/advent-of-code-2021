@@ -20,6 +20,7 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.2")
     implementation("io.ktor:ktor-client-core:1.6.6")
     implementation("io.ktor:ktor-client-cio:1.6.6")
+    implementation("com.typesafe:config:1.4.1")
     testImplementation("io.mockk:mockk:1.12.1")
     testImplementation("io.kotest:kotest-assertions-core:5.0.1")
     testImplementation("io.kotest.extensions:kotest-assertions-arrow:1.2.0")
