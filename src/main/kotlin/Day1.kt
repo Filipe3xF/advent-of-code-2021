@@ -9,4 +9,4 @@ fun main() = Day(
 
 fun List<Int>.countIncreases(): Int = zipWithNext().count { it.second > it.first }
 
-fun List<Int>.countIncreasesWindowed(windowSize: Int): Int = windowed(windowSize).map { it.sum() }.countIncreases()
+fun List<Int>.countIncreasesWindowed(windowSize: Int): Int = windowed(windowSize) { it.sum() }.countIncreases()
