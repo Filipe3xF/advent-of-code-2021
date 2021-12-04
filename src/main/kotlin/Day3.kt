@@ -39,7 +39,7 @@ fun List<String>.getStringWithRunningPredicate(predicate: List<String>.(Int) -> 
 }
 
 fun List<String>.getMostCommonCharacterAtIndex(index: Int, ifEqual: Char = '1'): Char =
-    getCountOfCharacterOccurrencesAtIndex(index).also { println(it) }
+    getCountOfCharacterOccurrencesAtIndex(index)
         .toSortedMap(prioritizeCharacter(ifEqual))
         .maxByOrNull { it.value }!!.key
 
