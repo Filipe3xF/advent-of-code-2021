@@ -1,8 +1,9 @@
 import utils.Day
 
-fun main() = Day(2, ::extractInstructions, { (0 to 0).followInstructions(it).multiply() }, {
-    SubmarinePosition(0, 0, 0).followInstructions(it).multiply()
-}).printResult()
+fun main() = Day(2, ::extractInstructions,
+    { (0 to 0).followInstructions(it).multiply() },
+    { SubmarinePosition(0, 0, 0).followInstructions(it).multiply() }
+).printResult()
 
 
 fun extractInstructions(inputList: List<String>) =
